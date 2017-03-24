@@ -1,9 +1,9 @@
 package com.yuseok.android.memowithnodejs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.yuseok.android.memowithnodejs.domain.Data;
+import com.yuseok.android.memowithnodejs.domain.Qna;
 
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class ListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ListActivity.this, WriteActivity.class);
+                startActivity(intent);
             }
         });
         setList();
@@ -39,7 +39,7 @@ public class ListActivity extends AppCompatActivity {
 
     ListView listView;
     CustomAdapter adapter;
-    List<Data.Qna> datas;
+    List<Qna> datas;
 
     private void setList() {
         listView = (ListView) findViewById(R.id.listView);
@@ -53,11 +53,11 @@ public class ListActivity extends AppCompatActivity {
 
 class CustomAdapter extends BaseAdapter {
 
-    List<Data.Qna> datas;
+    List<Qna> datas;
     Context context;
     LayoutInflater inflater;
 
-    public CustomAdapter(Context context, List<Data.Qna> datas) {
+    public CustomAdapter(Context context, List<Qna> datas) {
 
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -85,7 +85,7 @@ class CustomAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_list, null);
         }
-        Data.Qna qna = datas.get(position);
+        Qna qna = datas.get(position);
         TextView textTitle = (TextView) convertView.findViewById(R.id.textTitle);
         TextView textAuth = (TextView) convertView.findViewById(R.id.textWriter);
 
